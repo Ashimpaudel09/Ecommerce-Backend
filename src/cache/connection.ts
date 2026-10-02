@@ -1,8 +1,8 @@
 import Redis from 'ioredis';
-import { REDIS_URL } from '../config/env';
+import { env } from '../config/env';
 import { logger } from '../lib/logger';
 
-const redis = new Redis(REDIS_URL, {
+const redis = new Redis(env.REDIS_URL, {
   lazyConnect: true,
   maxRetriesPerRequest: 3,
 });

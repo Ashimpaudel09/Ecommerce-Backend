@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt, { type SignOptions } from 'jsonwebtoken';
 import { prisma } from '../../lib/prisma';
 import { RegisterInput, LoginInput, JwtPayload } from '../../types/auth';
-import { JWT_EXPIRES_IN, JWT_SECRET } from '../../config/env';
+import { env } from '../../config/env';
 import { AppError } from '../../errors/app.error';
 
 export class AuthService {
@@ -51,10 +51,10 @@ export class AuthService {
       role: user.role,
     };
     const options: SignOptions = {
-      expiresIn: JWT_EXPIRES_IN as SignOptions["expiresIn"],
+      expiresIn: env.JWT_EXPIRES_IN as SignOptions["expiresIn"],
     };
 
-    const token = jwt.sign(payload, JWT_SECRET, options);
+    const token = jwt.sign(payload, env.JWT_SECRET, options);
 
     return {
       token,
